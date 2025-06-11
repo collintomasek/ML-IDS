@@ -48,7 +48,7 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
 
-print("\n=== MULTICLASS CLASSIFICATION ===")
+print("\n--- MULTICLASS CLASSIFICATION ---")
 
 N = 2000
 df_multi = df.groupby("attack_label", group_keys=False).apply(lambda x: x.sample(min(N, len(x)), random_state=42))
