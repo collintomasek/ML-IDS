@@ -7,21 +7,17 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.utils import shuffle
 
-# === Load Dataset ===
 df = pd.read_csv("unsw_nb15_labeled.csv")
 
-# Drop unnecessary columns if present
 drop_cols = ['flow_id', 'source_ip', 'destination_ip']
 df.drop(columns=[col for col in drop_cols if col in df.columns], inplace=True, errors='ignore')
 
-# Show category counts
 print("\nFull Dataset Category Counts:")
 print(df["attack_label"].value_counts())
 print("\nBinary Label Counts:")
 print(df["binary_label"].value_counts())
 
-# === BINARY CLASSIFICATION ===
-print("\n=== BINARY CLASSIFICATION ===")
+print("\n--- BINARY CLASSIFICATION ---")
 df_bin = df.copy()
 df_bin['binary_label'] = df_bin['binary_label'].astype(int)
 
@@ -31,7 +27,6 @@ df_bin_balanced = pd.concat([
     df_bin[df_bin['binary_label'] == 1].sample(min_class_size, random_state=42)
 ])
 
-# Encode features
 for col in df_bin_balanced.select_dtypes(include='object').columns:
     df_bin_balanced[col] = LabelEncoder().fit_transform(df_bin_balanced[col].astype(str))
 
@@ -53,21 +48,17 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
 
-# === MULTICLASS CLASSIFICATION ===
 print("\n=== MULTICLASS CLASSIFICATION ===")
 
-# Sample max 2000 rows per class
 N = 2000
 df_multi = df.groupby("attack_label", group_keys=False).apply(lambda x: x.sample(min(N, len(x)), random_state=42))
 
-# Show sampled class distribution
 print("\nSampled Attack Label Counts:")
 print(df_multi["attack_label"].value_counts())
 
 X_multi = df_multi.drop(['attack_label', 'binary_label'], axis=1)
 y_multi = df_multi['attack_label']
 
-# Encode features
 for col in X_multi.select_dtypes(include='object').columns:
     X_multi[col] = LabelEncoder().fit_transform(X_multi[col].astype(str))
 
@@ -93,7 +84,6 @@ plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.show()
 
-# === ACCURACY COMPARISON ===
 binary_acc = clf_bin.score(X_test_bin, y_test_bin)
 multi_acc = clf_multi.score(X_test_multi, y_test_multi)
 
