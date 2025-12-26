@@ -1,0 +1,17 @@
+{
+  "dataset": "UNSW-NB15",
+  "model": "Random Forest Classifier",
+  "task": "Binary Intrusion Detection",
+  "metrics": {
+    "precision_weighted": 0.99,
+    "recall_weighted": 0.99,
+    "f1_weighted": 0.99,
+    "precision_macro": 0.60,
+    "recall_macro": 0.54,
+    "f1_macro": 0.55
+  },
+  "evaluation": {
+    "test_split": "official UNSW-NB15 testing set",
+    "notes": "Metrics computed after preprocessing and feature selection"
+  }
+}
