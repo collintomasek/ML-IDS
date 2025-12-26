@@ -1,10 +1,26 @@
-# Dataset
+# Intrusion Detection System (UNSW-NB15)
 
-This project uses the UNSW-NB15 intrusion detection dataset.
+## Overview
+Machine-learning-based IDS for detecting malicious network traffic.
 
-Raw CSV files are not included in this repository due to size and licensing.
+## Dataset
+UNSW-NB15 dataset with flow-level network features.
 
-To reproduce the dataset:
-1. Download UNSW-NB15 from the official source
-2. Place CSV files locally
-3. Run preprocessing via `src/ids_model.py`
+## Approach
+- Data preprocessing and feature selection
+- Supervised learning (Random Forest)
+- Evaluation via precision, recall, F1-score
+
+## How to Run
+pip install -r requirements.txt
+python src/ids_model.py
+
+## Project Structure
+src/ - model logic
+data/ - dataset instructions
+reports/ - evaluation outputs
+
+## Future Work
+- Real-time packet ingestion
+- Model explainability
+- SOC-style alerting
